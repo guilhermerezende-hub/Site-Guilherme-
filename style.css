@@ -173,6 +173,36 @@ img, video { display: block; max-width: 100%; }
     pointer-events: none;
 }
 
+/* Malha de pontos que só existe ao redor do cursor.
+   A posição vem das variáveis --mx / --my, atualizadas no java.js. */
+.hero-grid {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.6s var(--ease);
+    background-image: radial-gradient(rgba(255, 255, 255, 0.45) 1px, transparent 1px);
+    background-size: 34px 34px;
+    -webkit-mask-image: radial-gradient(230px circle at var(--mx, 50%) var(--my, 50%),
+                        #000 0%, rgba(0, 0, 0, 0.35) 45%, transparent 72%);
+            mask-image: radial-gradient(230px circle at var(--mx, 50%) var(--my, 50%),
+                        #000 0%, rgba(0, 0, 0, 0.35) 45%, transparent 72%);
+}
+
+/* Brilho dourado que segue o cursor */
+.hero-glow {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.6s var(--ease);
+    background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%),
+                rgba(201, 169, 97, 0.15), transparent 62%);
+}
+
+.hero.pointer-active .hero-grid,
+.hero.pointer-active .hero-glow { opacity: 1; }
+
 .hero-inner {
     position: relative;
     width: 100%;
@@ -200,12 +230,12 @@ img, video { display: block; max-width: 100%; }
 }
 
 .hero h1 {
-    font-size: clamp(2.6rem, 7.2vw, 5rem);
+    font-size: clamp(3rem, 9vw, 6.4rem);
     font-weight: 600;
-    line-height: 1.03;
-    letter-spacing: -0.038em;
-    max-width: 16ch;
-    margin-bottom: 28px;
+    line-height: 0.98;
+    letter-spacing: -0.045em;
+    max-width: 14ch;
+    margin-bottom: 26px;
 }
 
 .hero h1 em {
@@ -214,17 +244,40 @@ img, video { display: block; max-width: 100%; }
 }
 
 .hero-lead {
-    font-size: clamp(1rem, 1.5vw, 1.15rem);
+    font-size: clamp(1.05rem, 1.7vw, 1.3rem);
     color: var(--text-2);
-    max-width: 56ch;
-    margin-bottom: 44px;
+    max-width: 48ch;
+    margin-bottom: 46px;
 }
 
 .hero-actions {
     display: flex;
     flex-wrap: wrap;
     gap: 14px;
-    margin-bottom: 72px;
+}
+
+.hero-stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: clamp(28px, 6vw, 72px);
+    list-style: none;
+    margin-top: 72px;
+    padding-top: 34px;
+    border-top: 1px solid var(--border);
+}
+
+.hero-stats strong {
+    display: block;
+    font-size: clamp(1.7rem, 3vw, 2.2rem);
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    color: var(--text);
+    line-height: 1.1;
+}
+
+.hero-stats span {
+    font-size: 13px;
+    color: var(--text-3);
 }
 
 .btn {
@@ -261,29 +314,6 @@ img, video { display: block; max-width: 100%; }
     border-color: var(--accent);
     color: var(--accent);
     transform: translateY(-2px);
-}
-
-.hero-stats {
-    display: flex;
-    flex-wrap: wrap;
-    gap: clamp(28px, 6vw, 72px);
-    list-style: none;
-    padding-top: 36px;
-    border-top: 1px solid var(--border);
-}
-
-.hero-stats strong {
-    display: block;
-    font-size: clamp(1.6rem, 3vw, 2.1rem);
-    font-weight: 600;
-    letter-spacing: -0.03em;
-    color: var(--text);
-    line-height: 1.1;
-}
-
-.hero-stats span {
-    font-size: 13px;
-    color: var(--text-3);
 }
 
 /* ============================================================
@@ -523,7 +553,7 @@ img, video { display: block; max-width: 100%; }
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
     gap: clamp(16px, 2vw, 24px);
-    max-width: 900px;
+    max-width: var(--container);
     margin-inline: auto;
 }
 
@@ -548,16 +578,31 @@ img, video { display: block; max-width: 100%; }
     background: var(--surface-hover);
 }
 
-.contact-card img {
+.contact-card img,
+.contact-card svg {
     width: 26px;
     height: 26px;
     object-fit: contain;
     margin-bottom: 16px;
+}
+
+/* Ícones de marca nascem em cinza e ganham cor no hover */
+.contact-card img {
     filter: grayscale(1) opacity(0.65);
     transition: filter 0.4s var(--ease);
 }
-
 .contact-card:hover img { filter: none; }
+
+/* O GitHub é SVG: mesma lógica, via fill */
+.contact-card svg {
+    fill: var(--text-2);
+    opacity: 0.65;
+    transition: fill 0.4s var(--ease), opacity 0.4s var(--ease);
+}
+.contact-card:hover svg {
+    fill: var(--text);
+    opacity: 1;
+}
 
 .contact-label {
     font-size: 11px;
@@ -614,6 +659,7 @@ img, video { display: block; max-width: 100%; }
 .projects .reveal:nth-child(2) { transition-delay: 0.08s; }
 .projects .reveal:nth-child(3) { transition-delay: 0.16s; }
 .projects .reveal:nth-child(4) { transition-delay: 0.24s; }
+.projects .reveal:nth-child(5) { transition-delay: 0.32s; }
 
 /* ============================================================
    RESPONSIVO
@@ -638,7 +684,7 @@ img, video { display: block; max-width: 100%; }
     .hero { padding-top: 170px; }
     .hero-actions { width: 100%; }
     .btn { flex: 1 1 auto; }
-    .hero-stats { gap: 26px 40px; }
+    .hero-stats { gap: 26px 40px; margin-top: 54px; }
 
     .site-footer { justify-content: center; text-align: center; }
 }

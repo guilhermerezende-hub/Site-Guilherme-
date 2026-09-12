@@ -22,6 +22,46 @@
     window.addEventListener("scroll", atualizarHeader, { passive: true });
 
     /* --------------------------------------------------------
+       Efeito de cursor na home: a malha de pontos e o brilho
+       dourado acompanham o mouse. Só em telas com mouse de
+       verdade — em toque não faz sentido e gastaria bateria.
+       -------------------------------------------------------- */
+    var hero = document.querySelector(".hero");
+    var temMouse = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+
+    if (hero && temMouse && !reduzirMovimento) {
+        var mx = 0;
+        var my = 0;
+        var agendado = false;
+
+        function aplicarPosicao() {
+            agendado = false;
+            hero.style.setProperty("--mx", mx + "px");
+            hero.style.setProperty("--my", my + "px");
+        }
+
+        hero.addEventListener("mousemove", function (e) {
+            var area = hero.getBoundingClientRect();
+            mx = e.clientX - area.left;
+            my = e.clientY - area.top;
+
+            /* Um repaint por quadro, não um por evento de mouse. */
+            if (!agendado) {
+                agendado = true;
+                requestAnimationFrame(aplicarPosicao);
+            }
+        }, { passive: true });
+
+        hero.addEventListener("mouseenter", function () {
+            hero.classList.add("pointer-active");
+        });
+
+        hero.addEventListener("mouseleave", function () {
+            hero.classList.remove("pointer-active");
+        });
+    }
+
+    /* --------------------------------------------------------
        Elementos surgem conforme entram na tela
        -------------------------------------------------------- */
     var reveals = document.querySelectorAll(".reveal");
