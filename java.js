@@ -1,32 +1,80 @@
+/* ============================================================
+   Guilherme Rezende de Sá — Portfólio
+   Carregado com <script src="java.js" defer> no fim do <head>.
+   ============================================================ */
 
-const videos = document.querySelectorAll("video");
+(function () {
+    "use strict";
 
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        const video = entry.target;
+    var reduzirMovimento = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-        if (entry.isIntersecting) {
-            video.play();
-        } else {
-            video.pause();
-        }
+    /* --------------------------------------------------------
+       Header ganha borda ao sair do topo
+       -------------------------------------------------------- */
+    var header = document.querySelector(".site-header");
+
+    function atualizarHeader() {
+        if (!header) return;
+        header.classList.toggle("scrolled", window.scrollY > 12);
+    }
+
+    atualizarHeader();
+    window.addEventListener("scroll", atualizarHeader, { passive: true });
+
+    /* --------------------------------------------------------
+       Elementos surgem conforme entram na tela
+       -------------------------------------------------------- */
+    var reveals = document.querySelectorAll(".reveal");
+
+    if (reduzirMovimento || !("IntersectionObserver" in window)) {
+        reveals.forEach(function (el) { el.classList.add("is-visible"); });
+    } else {
+        var revelador = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                if (!entry.isIntersecting) return;
+                entry.target.classList.add("is-visible");
+                revelador.unobserve(entry.target);
+            });
+        }, { threshold: 0.15, rootMargin: "0px 0px -60px 0px" });
+
+        reveals.forEach(function (el) { revelador.observe(el); });
+    }
+
+    /* --------------------------------------------------------
+       Vídeos: tocam só quando visíveis.
+       Economiza banda — são mais de 130 MB no total.
+       -------------------------------------------------------- */
+    var videos = document.querySelectorAll(".card-media video");
+
+    if (!reduzirMovimento && "IntersectionObserver" in window) {
+        var reprodutor = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                var video = entry.target;
+                if (entry.isIntersecting) {
+                    var p = video.play();
+                    if (p && typeof p.catch === "function") {
+                        p.catch(function () { /* navegador bloqueou: ignora */ });
+                    }
+                } else if (!video.paused) {
+                    video.pause();
+                }
+            });
+        }, { threshold: 0.45 });
+
+        videos.forEach(function (video) { reprodutor.observe(video); });
+    }
+
+    /* --------------------------------------------------------
+       Clique no vídeo alterna play/pause
+       -------------------------------------------------------- */
+    videos.forEach(function (video) {
+        video.addEventListener("click", function () {
+            if (video.paused) {
+                var p = video.play();
+                if (p && typeof p.catch === "function") { p.catch(function () {}); }
+            } else {
+                video.pause();
+            }
+        });
     });
-}, {
-    threshold: 0.6
-});
-
-videos.forEach(video => {
-    observer.observe(video);
-});
-
-document.querySelectorAll("video").forEach(video => {
-    video.addEventListener("click", () => {
-        if (video.paused) {
-            video.play();
-        } else {
-            video.pause();
-        }
-    });
-});
-
-
+})();

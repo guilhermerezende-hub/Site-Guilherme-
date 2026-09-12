@@ -4,151 +4,237 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Portfólio | Guilherme Rezende de Sá</title>
+<title>Guilherme Rezende de Sá | Desenvolvedor Web</title>
+<meta name="description" content="Portfólio de Guilherme Rezende de Sá — desenvolvimento web, programação e suporte de TI. Sites institucionais entregues para clientes de fisioterapia, construção, educação e odontologia.">
+<meta name="author" content="Guilherme Rezende de Sá">
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Guilherme Rezende de Sá | Desenvolvedor Web">
+<meta property="og:description" content="Desenvolvimento web, programação e suporte de TI. Conheça os projetos que entreguei.">
+<meta property="og:locale" content="pt_BR">
+
+<link rel="icon" href="favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="theme-color" content="#0a0a0b">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
 <link rel="stylesheet" href="style.css">
-<link rel="stylesheet" href="java.js">
-<link rel="icon" href="favicon.png"/>
-
 </head>
 
 <body>
 
-<header>
-    <h1>Guilherme Rezende de Sá</h1>
-<nav>
-    <a href="#">Início</a>
-    <a href="#projetos">Projetos</a>
-    <a href="#sobre">Sobre</a> <!-- NOVO -->
-    <a href="#contato">Contato</a>
-</nav>
+<a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+
+<header class="site-header" id="topo">
+    <a class="brand" href="#topo" aria-label="Guilherme Rezende de Sá — início">
+        <img class="brand-mark" src="logo-gr.png" alt="" width="30" height="33">
+        <span class="brand-name">Guilherme Rezende de Sá</span>
+    </a>
+
+    <nav class="site-nav" aria-label="Navegação principal">
+        <a href="#projetos">Projetos</a>
+        <a href="#sobre">Sobre</a>
+        <a href="#contato">Contato</a>
+    </nav>
 </header>
 
-<section class="hero">
-    <div class="hero-content">
-        <h2>
-            Conheça o meu <span>Portifólio</span>
-        </h2>
+<main id="conteudo">
 
-        <p>
-            Conheça um pouco mais sobre mim e
-  também alguns projetos que criei.
+<section class="hero">
+    <div class="hero-inner">
+        <p class="eyebrow">Desenvolvimento Web &amp; TI</p>
+
+        <h1>Sites que colocam negócios <em>no ar</em>.</h1>
+
+        <p class="hero-lead">
+            Sou o Guilherme. Desenvolvo, publico e mantenho sites para empresas
+            e profissionais — do código à hospedagem. Abaixo estão quatro
+            projetos que entreguei para clientes reais.
         </p>
 
-        <a href="#projetos" class="btn">Ver Projetos</a>
+        <div class="hero-actions">
+            <a class="btn btn-primary" href="#projetos">Ver projetos</a>
+            <a class="btn btn-ghost" href="#contato">Falar comigo</a>
+        </div>
+
+        <ul class="hero-stats">
+            <li>
+                <strong>4</strong>
+                <span>Sites entregues</span>
+            </li>
+            <li>
+                <strong>+10</strong>
+                <span>Certificações</span>
+            </li>
+            <li>
+                <strong>100%</strong>
+                <span>Dedicação</span>
+            </li>
+        </ul>
     </div>
 </section>
 
-<section id="projetos">
-    <h2 class="title">Meus Sites</h2>
+<section class="section" id="projetos">
+    <div class="section-head reveal">
+        <h2>Projetos entregues</h2>
+        <p>
+            Cada site abaixo foi desenvolvido, publicado e configurado por mim.
+            Passe o cursor sobre um cartão para ver o projeto em movimento.
+        </p>
+    </div>
 
     <div class="projects">
 
-    <div class="card">
-        <h3>BSf Físio</h3>
-        <p>Site feito para uma <br>Fisioterapeuta.</p>
+        <article class="card reveal">
+            <div class="card-media">
+                <video src="BSfisio video.mp4" muted loop playsinline controls
+                       preload="metadata" aria-label="Demonstração do site BSf Físio"></video>
+            </div>
+            <div class="card-body">
+                <p class="card-index">01</p>
+                <h3>BSf Físio</h3>
+                <p>Site institucional desenvolvido para uma fisioterapeuta.</p>
+                <span class="card-tag">Fisioterapia</span>
+            </div>
+        </article>
 
-        <div class="carousel">
-           <video src="BSfisio video.mp4" muted loop autoplay playsinline controls></video>
-        </div>
-    </div>
+        <article class="card reveal">
+            <div class="card-media">
+                <video src="Seven video.mp4" muted loop playsinline controls
+                       preload="metadata" aria-label="Demonstração do site Seven"></video>
+            </div>
+            <div class="card-body">
+                <p class="card-index">02</p>
+                <h3>Seven</h3>
+                <p>Site institucional desenvolvido para uma empresa de construção.</p>
+                <span class="card-tag">Construção</span>
+            </div>
+        </article>
 
-    <div class="card">
-        <h3>Seven</h3>
-        <p>Site feito para uma empresa de construção.</p>
+        <article class="card reveal">
+            <div class="card-media">
+                <video src="New video.mp4" muted loop playsinline controls
+                       preload="metadata" aria-label="Demonstração do site New Edtech"></video>
+            </div>
+            <div class="card-body">
+                <p class="card-index">03</p>
+                <h3>New Edtech</h3>
+                <p>Site institucional desenvolvido para uma empresa de aprendizado.</p>
+                <span class="card-tag">Educação</span>
+            </div>
+        </article>
 
-        <div class="carousel">
-            <video src="Seven video.mp4" muted loop autoplay playsinline controls></video>
-        </div>
-    </div>
-
-    <div class="card">
-        <h3>New Edtech</h3>
-        <p>Site feito para uma empresa de aprendizado. </p>
-
-        <div class="carousel">
-           <video src="New video.mp4" muted loop autoplay playsinline controls></video>
-        </div>
-    </div>
-
-    <div class="card">
-        <h3>Dr. Igor</h3>
-        <p>Site feito para um <br>cirurgião-dentista</p>
-
-        <div class="carousel">
-            <video src="Dr video.mp4" muted loop autoplay playsinline controls></video>
-        </div>
-    </div>  
-
-
-</section>
-
-<section id="sobre">
-    <div class="sobre-container">
-
-        <div class="sobre-texto">
-            <h2>Conheça mais <span>sobre mim</span></h2>
-
-            <p>
-            Sou um profissional com sólida base em lógica de programação, com experiência em linguagens como Python e C#, além de estar em constante evolução com estudos em Java. Possuo domínio em programação orientada a objetos e boa capacidade de análise e resolução de problemas. Atuo também no desenvolvimento web, com conhecimentos em HTML, CSS, WordPress, Elementor e gerenciamento de sites e hospedagens.
-            </p>
-            <p>
-            Tenho familiaridade com diferentes sistemas operacionais (Windows, Linux e macOS), além de experiência com ferramentas como GitHub, Office 365, Copilot, Canva e Figma. Destaco-me pela comunicação clara, agilidade na identificação de falhas em software e hardware e pela busca constante por soluções eficientes.
-            </p>
-            <p>
-            Meu objetivo é contribuir de forma positiva dentro de uma equipe, agregando valor aos projetos e ao ambiente de trabalho. Tenho grande vontade de aprender, evoluir profissionalmente e crescer junto com a empresa, sempre buscando entregar resultados cada vez melhores.
-            </p>
-        </div>
-
-        <div class="sobre-info">
-
-        <div class="info-box">
-            <h3 class="counter">+10</h3>
-            <p>Certificações</p>
-        </div>
-
-        <div class="info-box">
-            <h3 class="counter-percent">100%</h3>
-            <p>Dedicação</p>
-        </div>
-
-</div>
+        <article class="card reveal">
+            <div class="card-media">
+                <video src="Dr video.mp4" muted loop playsinline controls
+                       preload="metadata" aria-label="Demonstração do site Dr. Igor"></video>
+            </div>
+            <div class="card-body">
+                <p class="card-index">04</p>
+                <h3>Dr. Igor</h3>
+                <p>Site institucional desenvolvido para um cirurgião-dentista.</p>
+                <span class="card-tag">Odontologia</span>
+            </div>
+        </article>
 
     </div>
 </section>
 
-<section id="contato">
-    <h2 class="title">Entre em Contato Comigo</h2>
+<section class="section" id="sobre">
+    <div class="section-head reveal">
+        <h2>Sobre mim</h2>
+    </div>
 
-    <div class="contact-container">
+    <div class="about-grid">
+        <div class="about-text reveal">
+            <p>
+                Sou um profissional com sólida base em lógica de programação, com experiência
+                em linguagens como Python e C#, além de estar em constante evolução com estudos
+                em Java. Possuo domínio em programação orientada a objetos e boa capacidade de
+                análise e resolução de problemas. Atuo também no desenvolvimento web, com
+                conhecimentos em HTML, CSS, WordPress, Elementor e gerenciamento de sites e
+                hospedagens.
+            </p>
+            <p>
+                Tenho familiaridade com diferentes sistemas operacionais (Windows, Linux e macOS),
+                além de experiência com ferramentas como GitHub, Office 365, Copilot, Canva e Figma.
+                Destaco-me pela comunicação clara, agilidade na identificação de falhas em software
+                e hardware e pela busca constante por soluções eficientes.
+            </p>
+            <p>
+                Meu objetivo é contribuir de forma positiva dentro de uma equipe, agregando valor
+                aos projetos e ao ambiente de trabalho. Tenho grande vontade de aprender, evoluir
+                profissionalmente e crescer junto com a empresa, sempre buscando entregar resultados
+                cada vez melhores.
+            </p>
+        </div>
 
-        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=guilhermerezendede00@gmail.com" class="contact-card">
-            <div class="icon">
-                <img class="linkgmail" src="gmail.png" alt="Icon-Gmail">
+        <aside class="about-aside reveal">
+            <div class="skills">
+                <h3>Tecnologias</h3>
+                <ul class="skill-list">
+                    <li>Python</li>
+                    <li>C#</li>
+                    <li>Java</li>
+                    <li>HTML</li>
+                    <li>CSS</li>
+                    <li>WordPress</li>
+                    <li>Elementor</li>
+                    <li>Git &amp; GitHub</li>
+                    <li>Linux</li>
+                    <li>Figma</li>
+                </ul>
             </div>
+        </aside>
+    </div>
+</section>
+
+<section class="section" id="contato">
+    <div class="section-head reveal">
+        <h2>Vamos conversar</h2>
+        <p>
+            Disponível para oportunidades e novos projetos.
+            Escolha o canal que preferir — respondo rápido.
+        </p>
+    </div>
+
+    <div class="contact-grid">
+
+        <a class="contact-card reveal"
+           href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=guilhermerezendede00@gmail.com"
+           target="_blank" rel="noopener">
+            <img src="gmail.png" alt="" width="26" height="26">
+            <span class="contact-label">E-mail</span>
+            <span class="contact-value">guilhermerezendede00@gmail.com</span>
         </a>
 
-        <a href="https://wa.me/5531999224466" target="_blank" class="contact-card">
-            <div class="icon">
-                <img class="linkwpp" src="wpp.png" alt="Icon-WhasApp">
-            </div>
-
+        <a class="contact-card reveal"
+           href="https://wa.me/5531999224466" target="_blank" rel="noopener">
+            <img src="wpp.png" alt="" width="26" height="26">
+            <span class="contact-label">WhatsApp</span>
+            <span class="contact-value">(31) 99922-4466</span>
         </a>
 
-        <a href="https://www.linkedin.com/in/guilhermerezendesa/" target="_blank" class="contact-card">
-            <div class="icon">
-                <img class="linkimg" src="linkedin.png.png" alt="Icon_Linkedin">
-            </div>
-
+        <a class="contact-card reveal"
+           href="https://www.linkedin.com/in/guilhermerezendesa/" target="_blank" rel="noopener">
+            <img src="linkedin.png.png" alt="" width="26" height="26">
+            <span class="contact-label">LinkedIn</span>
+            <span class="contact-value">/guilhermerezendesa</span>
         </a>
 
     </div>
 </section>
 
-<footer>
-    <p>© 2026 - Guilherme Rezende de Sá. Todos os direitos reservados.</p>
+</main>
+
+<footer class="site-footer">
+    <img src="logo-gr.png" alt="" width="22" height="24">
+    <p>© 2026 Guilherme Rezende de Sá. Todos os direitos reservados.</p>
 </footer>
 
+<script src="java.js" defer></script>
 </body>
 </html>
