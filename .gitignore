@@ -1,0 +1,27 @@
+# --- Vídeos e mídia pesada ---
+# O GitHub REJEITA arquivos acima de 100MB. Vídeos ficam só no servidor.
+# O deploy do cPanel não apaga arquivos, então eles continuam no ar normalmente.
+*.mp4
+*.mov
+*.avi
+*.mkv
+
+# --- Gerenciado pelo servidor: NÃO versionar ---
+# Usado pela HostGator para validar o certificado SSL.
+# Se isso for sobrescrito por um deploy, o HTTPS do site pode quebrar.
+.well-known/
+cgi-bin/
+
+# --- Lixo deixado por ferramentas do cPanel ---
+*.phpupgrader
+.htaccess.no_htaccess*
+*.bak
+*.bak_*
+
+# --- Sistema operacional / OneDrive ---
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# --- Editor ---
+.vscode/
