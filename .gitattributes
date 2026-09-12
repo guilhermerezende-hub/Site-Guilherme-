@@ -1,0 +1,13 @@
+# O servidor da HostGator é Linux e espera quebra de linha LF.
+# Um .cpanel.yml salvo com CRLF (padrão do Windows) pode fazer o
+# parser de YAML do cPanel falhar e o deploy não rodar.
+.cpanel.yml text eol=lf
+.htaccess   text eol=lf
+*.html      text eol=lf
+*.css       text eol=lf
+*.js        text eol=lf
+
+# Binários: nunca converter
+*.png binary
+*.jpg binary
+*.mp4 binary
