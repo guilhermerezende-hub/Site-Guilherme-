@@ -433,6 +433,55 @@ img, video { display: block; max-width: 100%; }
     gap: 28px;
 }
 
+/* Bloco de destaques — o que mais pesa numa triagem técnica */
+.highlights {
+    padding: 28px 26px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 2px solid var(--accent);
+    border-radius: var(--radius);
+}
+
+.highlight-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    list-style: none;
+}
+
+.highlight-list li {
+    position: relative;
+    padding-left: 18px;
+}
+
+.highlight-list li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 8px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+}
+
+.highlight-list strong {
+    display: block;
+    font-size: 14.5px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--text);
+    margin-bottom: 3px;
+}
+
+.highlight-list span {
+    display: block;
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--text-3);
+}
+
+.highlights h3,
 .skills h3 {
     font-size: 11px;
     font-weight: 600;
@@ -441,6 +490,8 @@ img, video { display: block; max-width: 100%; }
     color: var(--text-3);
     margin-bottom: 16px;
 }
+
+.highlights h3 { color: var(--accent); }
 
 .skill-list {
     display: flex;
