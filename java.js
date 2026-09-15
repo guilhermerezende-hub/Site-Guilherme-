@@ -82,7 +82,7 @@
 
     /* --------------------------------------------------------
        Vídeos: tocam só quando visíveis.
-       Economiza banda — são mais de 130 MB no total.
+       Economiza banda — são mais de 240 MB no total.
        -------------------------------------------------------- */
     var videos = document.querySelectorAll(".card-media video");
 

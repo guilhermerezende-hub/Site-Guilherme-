@@ -342,9 +342,50 @@ img, video { display: block; max-width: 100%; }
     max-width: 54ch;
 }
 
+/* A frase dos projetos cabe numa linha só — sem limite de largura */
+#projetos .section-head p { max-width: none; }
+
 /* ============================================================
    PROJETOS
    ============================================================ */
+
+/* Cabeçalho de cada categoria (Sites, Sistemas...) */
+.group-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 10px 24px;
+    max-width: var(--container);
+    margin: 0 auto clamp(26px, 3.5vw, 38px);
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--border);
+}
+
+/* Separa uma categoria da anterior */
+.projects + .group-head { margin-top: clamp(72px, 10vw, 112px); }
+
+.group-head h3 {
+    font-size: clamp(1.35rem, 2.4vw, 1.75rem);
+    font-weight: 600;
+    letter-spacing: -0.025em;
+    line-height: 1.2;
+}
+
+.group-head p {
+    margin-top: 6px;
+    font-size: 15px;
+    color: var(--text-2);
+}
+
+.group-count {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    white-space: nowrap;
+}
 
 .projects {
     display: grid;
@@ -419,6 +460,11 @@ img, video { display: block; max-width: 100%; }
     color: var(--text-2);
 }
 
+.card-body p strong {
+    font-weight: 600;
+    color: var(--text);
+}
+
 .card-tag {
     align-self: flex-start;
     margin-top: 10px;
@@ -457,29 +503,7 @@ img, video { display: block; max-width: 100%; }
 }
 .about-text p:last-child { margin-bottom: 0; }
 
-/* Fecha a coluna de texto: declaração de posicionamento + chamada */
-.about-statement {
-    margin-top: 44px;
-    padding-left: 22px;
-    border-left: 2px solid var(--accent);
-}
-
-.about-statement p {
-    font-size: clamp(1.15rem, 2vw, 1.45rem);
-    font-weight: 500;
-    line-height: 1.4;
-    letter-spacing: -0.02em;
-    color: var(--text);
-    margin-bottom: 10px;
-}
-
-.about-statement span {
-    display: block;
-    font-size: 14px;
-    line-height: 1.55;
-    color: var(--text-3);
-}
-
+/* Fecha a coluna de texto com a chamada */
 .about-cta {
     display: flex;
     flex-wrap: wrap;
