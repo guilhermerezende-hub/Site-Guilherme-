@@ -76,6 +76,14 @@
                                (total === 1 ? " projeto" : " projetos");
     });
 
+    /* Selo da foto na home: soma os projetos de todas as categorias,
+       com a mesma regra de se ajustar sozinho. */
+    var totalProjetos = document.querySelector("[data-total-projetos]");
+    if (totalProjetos) {
+        var soma = document.querySelectorAll(".projects .card").length;
+        totalProjetos.textContent = String(soma).padStart(2, "0");
+    }
+
     /* --------------------------------------------------------
        Elementos surgem conforme entram na tela
        -------------------------------------------------------- */

@@ -162,7 +162,7 @@ img, video { display: block; max-width: 100%; }
     position: relative;
     display: flex;
     align-items: center;
-    padding: 160px clamp(20px, 5vw, 60px) 20px;
+    padding: 150px clamp(20px, 5vw, 60px) clamp(40px, 6vw, 72px);
     overflow: hidden;
 }
 
@@ -210,28 +210,34 @@ img, video { display: block; max-width: 100%; }
 .hero.pointer-active .hero-grid,
 .hero.pointer-active .hero-glow { opacity: 1; }
 
+/* Texto à esquerda, foto à direita; a faixa de clientes fecha embaixo */
 .hero-inner {
     position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.75fr);
+    align-items: center;
+    gap: clamp(48px, 6vw, 88px) clamp(40px, 6vw, 96px);
     width: 100%;
     max-width: var(--container);
     margin-inline: auto;
 }
 
-.eyebrow {
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 28px;
+/* Mesmo indicador do Sobre, em formato de selo */
+.hero-status {
+    padding: 7px 16px 7px 14px;
+    margin-bottom: 30px;
+    font-size: 13px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 100px;
 }
 
 .hero h1 {
-    font-size: clamp(2.4rem, 6.5vw, 4.6rem);
+    font-size: clamp(2.3rem, 5vw, 4rem);
     font-weight: 600;
-    line-height: 0.98;
+    line-height: 1.02;
     letter-spacing: -0.045em;
-    max-width: 14ch;
+    max-width: 16ch;
     margin-bottom: 26px;
 }
 
@@ -241,16 +247,144 @@ img, video { display: block; max-width: 100%; }
 }
 
 .hero-lead {
-    font-size: clamp(1.05rem, 1.7vw, 1.3rem);
+    font-size: clamp(1.05rem, 1.5vw, 1.2rem);
     color: var(--text-2);
-    max-width: 48ch;
-    margin-bottom: 46px;
+    max-width: 46ch;
+    margin-bottom: 40px;
 }
 
 .hero-actions {
     display: flex;
     flex-wrap: wrap;
     gap: 14px;
+}
+
+.btn svg {
+    flex: none;
+    fill: currentColor;
+}
+
+/* Atalho para quem chega pelo lado da contratação */
+.hero-note {
+    margin-top: 24px;
+    font-size: 14px;
+    color: var(--text-3);
+}
+
+.hero-note a {
+    color: var(--text-2);
+    text-decoration: underline;
+    text-decoration-color: var(--accent-line);
+    text-underline-offset: 4px;
+    transition: color 0.3s var(--ease);
+}
+.hero-note a:hover { color: var(--accent); }
+
+/* Foto: moldura dourada deslocada por trás e selo com o total de projetos */
+.hero-photo {
+    position: relative;
+    isolation: isolate;
+    justify-self: end;
+    width: min(100%, 360px);
+}
+
+.hero-photo::before {
+    content: "";
+    position: absolute;
+    inset: 20px -20px -20px 20px;
+    z-index: -1;
+    border: 1px solid var(--accent-line);
+    border-radius: 24px;
+}
+
+.hero-photo-frame {
+    position: relative;
+    overflow: hidden;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border-strong);
+    border-radius: 24px;
+}
+
+.hero-photo-frame img {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    object-position: 0% 50%;
+}
+
+/* Escurece a base (onde fica o selo) e a borda direita da foto */
+.hero-photo-frame::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(to top, rgba(10, 10, 11, 0.55), transparent 38%),
+        linear-gradient(to left, rgba(10, 10, 11, 0.4), transparent 30%);
+    pointer-events: none;
+}
+
+.hero-badge {
+    position: absolute;
+    left: -34px;
+    bottom: 34px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 20px 14px 18px;
+    background: rgba(15, 15, 17, 0.86);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--border-strong);
+    border-radius: 14px;
+    box-shadow: 0 18px 40px -18px rgba(0, 0, 0, 0.9);
+}
+
+.hero-badge strong {
+    font-size: 2rem;
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    color: var(--accent);
+}
+
+.hero-badge span {
+    max-width: 18ch;
+    font-size: 13px;
+    line-height: 1.35;
+    color: var(--text-2);
+}
+
+/* Prova social: quem já usa o que eu entreguei */
+.hero-clients {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 14px 36px;
+    padding-top: 30px;
+    border-top: 1px solid var(--border);
+}
+
+.hero-clients p {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-3);
+}
+
+.hero-clients ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 30px;
+    list-style: none;
+}
+
+.hero-clients li {
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--text-2);
 }
 
 .hero-stats {
@@ -609,7 +743,10 @@ img, video { display: block; max-width: 100%; }
 }
 
 .skill-list li {
-    padding: 7px 14px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 14px 7px 12px;
     font-size: 13px;
     color: var(--text-2);
     background: var(--surface);
@@ -619,9 +756,44 @@ img, video { display: block; max-width: 100%; }
 }
 
 .skill-list li:hover {
-    color: var(--accent);
-    border-color: var(--accent-line);
+    color: var(--text);
+    border-color: var(--border-strong);
 }
+
+/* Ícones das tecnologias (sprite no fim do index.html). Mesma lógica dos
+   cartões de contato: nascem neutros e ganham a cor da marca no hover. */
+.skill-icon {
+    flex: none;
+    width: 15px;
+    height: 15px;
+    fill: currentColor;
+    color: var(--text-3);
+    transition: color 0.3s var(--ease);
+}
+
+.skill-list li:hover .skill-icon { color: var(--marca, var(--accent)); }
+
+/* Cor de cada marca. As escuras (GitHub, DBeaver, Elementor, WordPress)
+   usam um tom mais claro para não sumir no fundo preto. Quem não tem
+   classe (Edge Functions, APIs REST) fica com o dourado do site. */
+.tec-python     { --marca: #4b8bbe; }
+.tec-csharp     { --marca: #a179dc; }
+.tec-javascript { --marca: #f7df1e; }
+.tec-java       { --marca: #e76f00; }
+.tec-react      { --marca: #61dafb; }
+.tec-tailwind   { --marca: #38bdf8; }
+.tec-html       { --marca: #e34f26; }
+.tec-css        { --marca: #2965f1; }
+.tec-docker     { --marca: #2496ed; }
+.tec-supabase   { --marca: #3ecf8e; }
+.tec-swagger    { --marca: #85ea2d; }
+.tec-dbeaver    { --marca: #c49a6c; }
+.tec-github     { --marca: #f4f4f1; }
+.tec-gitlab     { --marca: #fc6d26; }
+.tec-wordpress  { --marca: #4aa3df; }
+.tec-elementor  { --marca: #e0457b; }
+.tec-linux      { --marca: #fcc624; }
+.tec-figma      { --marca: #f24e1e; }
 
 /* ============================================================
    CONTATO
@@ -722,6 +894,14 @@ img, video { display: block; max-width: 100%; }
 .site-footer img { width: 22px; opacity: 0.5; }
 .site-footer p { text-align: center; }
 
+/* Só guarda os <symbol> dos ícones; não ocupa espaço na página */
+.sprite {
+    position: absolute;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+}
+
 /* ============================================================
    ANIMAÇÃO DE ENTRADA
    ============================================================ */
@@ -748,6 +928,20 @@ img, video { display: block; max-width: 100%; }
 
 @media (max-width: 900px) {
     .about-grid { grid-template-columns: 1fr; }
+
+    /* A foto sobe para antes do texto: o rosto é a primeira coisa vista */
+    .hero-inner { grid-template-columns: 1fr; }
+    .hero-photo {
+        order: -1;
+        justify-self: start;
+        width: min(50%, 230px);
+    }
+    /* O selo sai pela direita da foto, no espaço livre ao lado dela */
+    .hero-badge {
+        left: auto;
+        right: -150px;
+        bottom: 20px;
+    }
 }
 
 @media (max-width: 720px) {
@@ -761,7 +955,7 @@ img, video { display: block; max-width: 100%; }
 
     html { scroll-padding-top: 120px; }
 
-    .hero { padding-top: 170px; }
+    .hero { padding-top: 146px; }
     .hero-actions { width: 100%; }
     .btn { flex: 1 1 auto; }
     .hero-stats { gap: 26px 40px; margin-top: 54px; }
