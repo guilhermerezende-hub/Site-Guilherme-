@@ -244,6 +244,8 @@ img, video { display: block; max-width: 100%; }
 .hero h1 em {
     font-style: normal;
     color: var(--accent);
+    /* Não deixa termos com hífen, como "full-stack", quebrarem no meio */
+    white-space: nowrap;
 }
 
 .hero-lead {
@@ -257,6 +259,13 @@ img, video { display: block; max-width: 100%; }
     display: flex;
     flex-wrap: wrap;
     gap: 14px;
+}
+
+/* Botões da home mais largos, com peso de chamada principal.
+   No celular eles já ocupam a largura toda (ver RESPONSIVO). */
+.hero-actions .btn {
+    min-width: min(300px, 100%);
+    padding-block: 17px;
 }
 
 .btn svg {
@@ -285,7 +294,7 @@ img, video { display: block; max-width: 100%; }
     position: relative;
     isolation: isolate;
     justify-self: end;
-    width: min(100%, 360px);
+    width: min(100%, 280px);
 }
 
 .hero-photo::before {
@@ -305,8 +314,11 @@ img, video { display: block; max-width: 100%; }
     border-radius: 24px;
 }
 
+/* height: auto anula o height="400" do HTML; sem isso o aspect-ratio
+   é ignorado e a foto fica estreita e alta no celular */
 .hero-photo-frame img {
     width: 100%;
+    height: auto;
     aspect-ratio: 4 / 5;
     object-fit: cover;
     object-position: 0% 50%;
@@ -934,12 +946,13 @@ img, video { display: block; max-width: 100%; }
     .hero-photo {
         order: -1;
         justify-self: start;
-        width: min(50%, 230px);
+        width: min(60%, 260px);
     }
-    /* O selo sai pela direita da foto, no espaço livre ao lado dela */
+    /* O selo sai pela direita da foto, no espaço livre ao lado dela.
+       Em % da largura da foto, para nunca passar da borda da tela. */
     .hero-badge {
         left: auto;
-        right: -150px;
+        right: -60%;
         bottom: 20px;
     }
 }
