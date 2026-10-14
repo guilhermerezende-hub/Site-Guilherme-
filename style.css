@@ -399,8 +399,6 @@ img, video { display: block; max-width: 100%; }
     overflow-x: auto;
     overflow-y: hidden;
     padding-bottom: 16px;   /* espaço entre as logos e a barra */
-    scrollbar-width: thin;
-    scrollbar-color: rgba(201, 169, 97, 0.5) rgba(255, 255, 255, 0.06);
     -webkit-mask-image:
         linear-gradient(to right, transparent, #000 10%, #000 90%, transparent),
         linear-gradient(#000, #000);
@@ -415,17 +413,28 @@ img, video { display: block; max-width: 100%; }
             mask-repeat: no-repeat;
 }
 
-/* O Safari só estiliza a barra por estes seletores */
-.logos::-webkit-scrollbar { height: 6px; }
+/* Barra fina de 3px, sem as setinhas (Chrome, Edge e Safari). Não usa
+   scrollbar-width aqui: com ela o Chrome ignora estes seletores e volta
+   para a barra "thin" padrão, que é bem mais grossa. */
+.logos::-webkit-scrollbar { height: 3px; }
+.logos::-webkit-scrollbar-button { display: none; }
 .logos::-webkit-scrollbar-track {
     background: rgba(255, 255, 255, 0.06);
-    border-radius: 3px;
+    border-radius: 2px;
 }
 .logos::-webkit-scrollbar-thumb {
-    background: rgba(201, 169, 97, 0.5);
-    border-radius: 3px;
+    background: rgba(201, 169, 97, 0.55);
+    border-radius: 2px;
 }
 .logos::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+/* O Firefox não entende os seletores acima; "thin" é o mais fino que ele tem */
+@supports not selector(::-webkit-scrollbar) {
+    .logos {
+        scrollbar-width: thin;
+        scrollbar-color: rgba(201, 169, 97, 0.55) rgba(255, 255, 255, 0.06);
+    }
+}
 
 .logos-faixa {
     flex: none;
