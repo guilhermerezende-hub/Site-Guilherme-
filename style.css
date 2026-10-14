@@ -388,17 +388,44 @@ img, video { display: block; max-width: 100%; }
     color: var(--text-3);
 }
 
-/* Carrossel infinito: duas cópias da faixa lado a lado, cada uma anda
-   100% da própria largura, e a segunda cai exatamente onde a primeira
-   começou. As bordas esmaecem para as logos entrarem e saírem suaves. */
+/* Carrossel: o java.js rola o .logos sozinho e a barra de rolagem deixa
+   a pessoa avançar ou voltar mais rápido. São três cópias da faixa (a
+   terceira o JS cria), e o loop dá a volta sem emenda. As bordas esmaecem
+   as logos; a tira de baixo, onde fica a barra, fica inteira. */
 .logos {
     flex: 1;
     min-width: 0;
     display: flex;
-    overflow: hidden;
-    -webkit-mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent);
-            mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent);
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding-bottom: 16px;   /* espaço entre as logos e a barra */
+    scrollbar-width: thin;
+    scrollbar-color: rgba(201, 169, 97, 0.5) rgba(255, 255, 255, 0.06);
+    -webkit-mask-image:
+        linear-gradient(to right, transparent, #000 10%, #000 90%, transparent),
+        linear-gradient(#000, #000);
+    -webkit-mask-size: 100% calc(100% - 12px), 100% 12px;
+    -webkit-mask-position: top, bottom;
+    -webkit-mask-repeat: no-repeat;
+            mask-image:
+        linear-gradient(to right, transparent, #000 10%, #000 90%, transparent),
+        linear-gradient(#000, #000);
+            mask-size: 100% calc(100% - 12px), 100% 12px;
+            mask-position: top, bottom;
+            mask-repeat: no-repeat;
 }
+
+/* O Safari só estiliza a barra por estes seletores */
+.logos::-webkit-scrollbar { height: 6px; }
+.logos::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 3px;
+}
+.logos::-webkit-scrollbar-thumb {
+    background: rgba(201, 169, 97, 0.5);
+    border-radius: 3px;
+}
+.logos::-webkit-scrollbar-thumb:hover { background: var(--accent); }
 
 .logos-faixa {
     flex: none;
@@ -407,13 +434,6 @@ img, video { display: block; max-width: 100%; }
     gap: 64px;
     padding-right: 64px;   /* mesmo vão entre o fim de uma cópia e o início da outra */
     list-style: none;
-    animation: rolar 42s linear infinite;
-}
-
-.logos:hover .logos-faixa { animation-play-state: paused; }
-
-@keyframes rolar {
-    to { transform: translateX(-100%); }
 }
 
 /* As logos são silhuetas brancas (pasta logos/): ficam discretas e
@@ -974,9 +994,14 @@ img, video { display: block; max-width: 100%; }
     .hero-inner { grid-template-columns: minmax(0, 1fr); }
     .hero-photo {
         order: -1;
-        justify-self: start;
+        justify-self: center;
         width: min(60%, 260px);
     }
+
+    /* Hero inteira centralizada na coluna única */
+    .hero-text { text-align: center; }
+    .hero h1 { margin-inline: auto; }
+    .hero-actions { justify-content: center; }
     /* O selo sai pela direita da foto, no espaço livre ao lado dela.
        Em % da largura da foto, para nunca passar da borda da tela. */
     .hero-badge {
@@ -985,11 +1010,12 @@ img, video { display: block; max-width: 100%; }
         bottom: 20px;
     }
 
-    /* Rótulo em cima, carrossel na largura toda */
+    /* Rótulo em cima, centralizado; carrossel na largura toda */
     .hero-clients {
         flex-direction: column;
         align-items: stretch;
         gap: 22px;
+        text-align: center;
     }
     .hero-clients p { max-width: none; }
 }
@@ -1013,6 +1039,12 @@ img, video { display: block; max-width: 100%; }
     .logos-faixa { gap: 44px; padding-right: 44px; }
     .logos-faixa img { height: 40px; }
 
+    /* Menos vazio entre as seções na tela pequena */
+    .section { padding-block: clamp(64px, 9vh, 88px); }
+
+    /* Mais espaço útil no cartão: o e-mail cabe numa linha até em 320px */
+    .contact-card { padding: 26px 22px; }
+
     .site-footer { grid-template-columns: 1fr; justify-items: center; }
 
     /* No celular os blocos só aparecem com fade, sem deslizar */
@@ -1032,8 +1064,7 @@ img, video { display: block; max-width: 100%; }
 
     .card:hover { box-shadow: none; }
 
-    /* Um toque não deve congelar o carrossel nem deixar uma logo acesa */
-    .logos:hover .logos-faixa { animation-play-state: running; }
+    /* Um toque não deve deixar uma logo acesa */
     .logos-faixa img:hover { opacity: 0.55; }
 }
 
@@ -1045,14 +1076,19 @@ img, video { display: block; max-width: 100%; }
     }
     .reveal { opacity: 1; transform: none; }
 
-    /* Sem movimento: as logos ficam paradas, quebrando em linhas */
-    .logos { -webkit-mask-image: none; mask-image: none; }
+    /* Sem movimento: as logos ficam paradas, quebrando em linhas
+       (o java.js também não rola o carrossel nesse modo) */
+    .logos {
+        overflow: visible;
+        padding-bottom: 0;
+        -webkit-mask-image: none;
+                mask-image: none;
+    }
     .logos-faixa {
         flex: 1 1 auto;
         flex-wrap: wrap;
         gap: 24px 48px;
         padding-right: 0;
-        animation: none;
     }
     .logos-faixa[aria-hidden="true"] { display: none; }
 }

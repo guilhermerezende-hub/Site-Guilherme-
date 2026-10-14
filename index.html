@@ -96,8 +96,8 @@
         </figure>
 
         <div class="hero-clients">
-            <p>Empresas que confiam no meu trabalho</p>
-            <div class="logos">
+            <p id="clientes-titulo">Empresas que confiam no meu trabalho</p>
+            <div class="logos" role="region" aria-labelledby="clientes-titulo" tabindex="0">
                 <ul class="logos-faixa">
                     <li><img src="logos/financial-experts.png" alt="Financial Experts" width="129" height="48" decoding="async"></li>
                     <li><img src="logos/veriseal.png" alt="VeriSeal" width="190" height="48" decoding="async"></li>
@@ -108,8 +108,8 @@
                     <li><img src="logos/priscilla-rezende.png" alt="Priscilla Rezende" width="154" height="48" decoding="async"></li>
                     <li><img src="logos/visual-code-devs.png" alt="Visual Code Devs" width="151" height="48" decoding="async"></li>
                 </ul>
-                <!-- Cópia da faixa: é ela que entra no lugar da primeira e fecha
-                     o loop sem emenda. Leitores de tela ignoram. -->
+                <!-- Cópia da faixa para o loop não ter emenda (o java.js cria
+                     uma terceira). Leitores de tela ignoram. -->
                 <ul class="logos-faixa" aria-hidden="true">
                     <li><img src="logos/financial-experts.png" alt="" width="129" height="48" decoding="async"></li>
                     <li><img src="logos/veriseal.png" alt="" width="190" height="48" decoding="async"></li>
@@ -444,7 +444,7 @@
            target="_blank" rel="noopener">
             <img src="gmail.png" alt="" width="26" height="26">
             <span class="contact-label">E-mail</span>
-            <span class="contact-value">guilhermerezende00@gmail.com</span>
+            <span class="contact-value">guilhermerezende00<wbr>@gmail.com</span>
         </a>
 
         <a class="contact-card reveal"
